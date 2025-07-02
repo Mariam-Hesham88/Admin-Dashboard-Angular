@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --main-color: #09c;
+    --light-color: #9db6f0;
+}
+
+section{
+    min-height: 100vh;
+}
+
+.cr{
+    cursor: pointer;
+}
+
+.bg-main-color{
+    background-color: var(--main-color);
+}
+
+.bg-light-color{
+    background-color: var(--light-color);
+}
+
+// .text-center{
+//     text-align: center;
+// }
