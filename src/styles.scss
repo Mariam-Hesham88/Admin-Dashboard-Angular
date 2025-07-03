@@ -2,6 +2,7 @@
 :root{
     --main-color: #09c;
     --light-color: #9db6f0;
+    --gray : #ccccccc8;
 }
 
 section{
@@ -19,6 +20,7 @@ section{
 .bg-light-color{
     background-color: var(--light-color);
 }
+
 
 // .text-center{
 //     text-align: center;
