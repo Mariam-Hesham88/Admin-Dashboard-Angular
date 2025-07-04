@@ -1,1 +1,27 @@
-<p>sidebar works!</p>
+<section class="rounded-end-5 bg-primary position-relative">
+    <div class="row d-flex justify-content-end">
+        <h1 class="text-white h4 text-center py-3">Admin-Dashboard</h1>
+
+        <ul class="w-75">
+            <li class="p-2 ps-3" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-rectangle-list"></i>
+                <a routerLink='/dashboard'> Dashboard</a>
+            </li>
+            <li class="p-2 ps-3" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-address-book"></i>
+                <a routerLink='/task'> Tasks</a>
+            </li>
+            <li class="p-2 ps-3" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-regular fa-file-code"></i>
+                <a routerLink='/employee'> Employees</a>
+            </li>
+            <li class="p-2 ps-3" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa-solid fa-list-check"></i>
+                <a routerLink='/department'> Departments</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <button type="button" class="btn btn-light w-75" (click)="logout()"> <i class="fa-solid fa-arrow-right-from-bracket"></i> LogOut </button>
+</section>

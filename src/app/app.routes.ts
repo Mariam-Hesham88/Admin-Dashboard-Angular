@@ -37,6 +37,18 @@ export const routes: Routes = [
                 path: 'AddTask',
                 loadComponent: () => import('./components/add-task/add-task').then(m => m.AddTask)
             },
+            {
+                path: 'task',
+                loadComponent: () => import('./components/task/task').then(m => m.Task)
+            },
+            {
+                path: 'employee',
+                loadComponent: () => import('./components/employee/employee').then(m => m.Employee)
+            },
+            {
+                path: 'department',
+                loadComponent: () => import('./components/department/department').then(m => m.Department)
+            },
         ]
     },
     {
