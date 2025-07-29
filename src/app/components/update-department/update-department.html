@@ -2,7 +2,7 @@
     <div class="row p-5">
         <div class="col-md-6">
             <div class="form-group w-100">
-                <form [formGroup]="addDepartmentForm" (ngSubmit)="AddDepartment()">
+                <form [formGroup]="updateDepartmentForm" (ngSubmit)="UpdateDepartment()">
                     <div class="mb-2">
                         <label for="id" class="form-label">Department ID</label>
                         <input type="text" id="id" class="form-control" placeholder="Enter department id"
@@ -23,7 +23,7 @@
 
                     <div>
                         <a routerLink="/department" class="btn btn-secondary mt-2 me-3"> <i class="fa-solid fa-arrow-left"></i> Go Back</a>
-                        <button class="btn btn-primary mt-2" type="submit">Add</button>
+                        <button class="btn btn-warning mt-2" type="submit">Update</button>
                     </div>
                 </form>
             </div>

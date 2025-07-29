@@ -1,33 +1,39 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { TaskItemService } from '../../core/services/task-item-service';
 import { ITaskItem } from '../../core/interfaces/itask-item';
+// import { DepartmentService } from '../../core/services/department-service';
 import { EmployeeService } from '../../core/services/employee-service';
 import { IEmployee } from '../../core/interfaces/iemployee';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-add-task',
+  selector: 'app-update-task-item',
   imports: [ReactiveFormsModule, RouterLink],
-  templateUrl: './add-task.html',
-  styleUrl: './add-task.scss'
+  templateUrl: './update-task-item.html',
+  styleUrl: './update-task-item.scss'
 })
-export class AddTask implements OnInit {
-  private readonly _FormBuilder = inject(FormBuilder);
-  private readonly _TaskItemService = inject(TaskItemService);
-  private readonly _EmployeeService = inject(EmployeeService);
+export class UpdateTaskItem {
+  private readonly _ActivatedRoute = inject(ActivatedRoute)
+  private readonly _FormBuilder = inject(FormBuilder)
+  private readonly _TaskItemService = inject(TaskItemService)
+  private readonly _Router = inject(Router)
+  private readonly _EmployeeService = inject(EmployeeService)
 
+  taskList: ITaskItem[] = []
   taskItemList: ITaskItem[] = [];
   employeeList: IEmployee[] = [];
 
-  addTaskItemForm: FormGroup = this._FormBuilder.group({
+  taskItemId:number = 0;
+
+  updateTaskItemForm: FormGroup = this._FormBuilder.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
     description: [''],
     priority: ['', Validators.required],
     status: ['', Validators.required],
     startDate: ['', Validators.required],
     deadLine: ['', Validators.required],
-    assignedTo: ['', Validators.required]
+    assignedToId: ['', Validators.required]
   }, { validators: this.deadlineAfterStartDate }
   );
 
@@ -41,23 +47,24 @@ export class AddTask implements OnInit {
     return null;
   }
 
-  loadTaskItem(): void {
+  loadData(): void {
     this.taskItemList = this._TaskItemService.GetAll();
     this.employeeList = this._EmployeeService.GetAll();
   }
 
   ngOnInit(): void {
-    this.loadTaskItem();
+    this.loadData();
+    this.taskItemId = Number(this._ActivatedRoute.snapshot.paramMap.get('id'));
+    const data = this._TaskItemService.GetById(this.taskItemId);
+    if(data){
+      this.updateTaskItemForm.patchValue(data);
+    }
   }
 
-  AddTaskItem(): void {
-    if (this.addTaskItemForm.invalid) {
-      alert("Please make sure the deadline is after the start date.");
-    }
-    else{
-      this._TaskItemService.Create(this.addTaskItemForm.value);
-      this.loadTaskItem();
-      this.addTaskItemForm.reset();
-    }
+  UpdateTaskItem(): void {
+    console.log("worked");
+    this._TaskItemService.Update(this.taskItemId, this.updateTaskItemForm.value);
+    this._Router.navigate(['/dashboard']);
+    this.loadData();
   }
 }

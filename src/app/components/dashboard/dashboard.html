@@ -1,1 +1,49 @@
-<p>dashboard works!</p>
+<nav class="navbar bg-white">
+    <div class="container-fluid d-flex justify-content-center align-content-center">
+        <input class="form-control me-2" type="search" placeholder="Search" [(ngModel)]="SearchValue"
+            aria-label="Search" />
+    </div>
+</nav>
+
+
+<section class=" p-5 pt-2">
+    <div class="p-4 ps-3">
+        <a routerLink='/addTask' routerLinkActive="router-link-active" class="btn btn-primary"><i
+                class="fa fa-plus"></i> Add New Task</a>
+        <hr>
+    </div>
+    <table class="table">
+        <thead>
+            <tr class="">
+                <th scope="col" class="heading">Task</th>
+                <th scope="col" class="heading">Periority</th>
+                <th scope="col" class="heading">Satus</th>
+                <th scope="col" class="heading">Assigned to</th>
+                <th scope="col" class="heading">Start-Date</th>
+                <th scope="col" class="heading">Deadline</th>
+                <th scope="col" class="heading">Controllers</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(taskItemList.length !== 0){
+                @for (item of taskItemList | searchTaskItem: SearchValue; track $index) {
+                    <tr class="">
+                        <td>{{item.title}}</td>
+                        <td>{{item.priority}}</td>
+                        <td>{{item.status}}</td>
+                        <td>{{item.assignedTo.fullName}}</td>
+                        <td>{{item.startDate | date: 'dd-MM-yyyy'}}</td>
+                        <td>{{item.deadLine | date: 'dd-MM-yyyy'}}</td>
+                        <td>
+                            <a [routerLink]='["/updateTask" , item.id]' class="btn btn-outline-warning me-2">Update</a>
+                            <button class="btn btn-outline-danger" (click)="DeleteTaskItem(item.id)">Delete</button>
+                        </td>
+                    </tr>
+                }
+            }
+            @else {
+                <h1>No Task Available Now!</h1>
+            }
+        </tbody>
+    </table>
+</section>

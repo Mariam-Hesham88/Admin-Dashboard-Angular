@@ -1,7 +1,30 @@
 section {
     min-height: 100vh;
-    width: 65%;
+    width: 100%;
+    background-color: var(--main-color);
+    position: fixed;
+    transform: none !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
 }
+
+@media (max-width: 992px) {
+    section {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        transform: translateX(-100%);
+        z-index: 1050;
+    }
+
+    section.show {
+        transform: translateX(0);
+    }
+}
+
+
 
 ul {
     list-style: none;
@@ -13,7 +36,8 @@ ul li {
     font-weight: 500;
     line-height: 48px;
     transition: all 0.3s ease;
-    border-radius: 25px 0 0 25px ;
+    border-radius: 25px 0 0 25px;
+    padding: 4px 4px 4px 8px;
 }
 
 ul li a {
@@ -32,4 +56,26 @@ button {
     bottom: 8%;
     right: 12%;
     color: var(--main-color);
+    width: 75%;
 }
+
+// @media (max-width: 992px) {
+//     section {
+//         width: 100%
+//     }
+
+//     ul li {
+//         font-size: 14px;
+//         width: 100%;
+//         padding: 4px 4px 8px 4px;
+//     }
+
+//     h1,
+//     a {
+//         font-size: 14px;
+//     }
+
+//     button{
+//         width: 100%;
+//     }
+// }

@@ -2,7 +2,7 @@
     <div class="row p-5">
         <div class="col-md-6">
             <div class="form-group w-100">
-                <form [formGroup]="addEmployeeForm" (ngSubmit)="AddEmployee()">
+                <form [formGroup]="updateEmployeeForm" (ngSubmit)="UpdateEmployee()">
                     <div class="mb-2">
                         <label for="fullName" class="form-label">Full Name</label>
                         <input type="text" id="fullName" class="form-control" placeholder="Enter full name"
@@ -29,10 +29,6 @@
                             @for (item of departmentList; track $index) {
                             <option [value]="item.id">{{ item.name }}</option>
                             }
-
-                            <!-- @for (item of employeeList; track $index) {
-                                <option [value]="item.departmentId">{{item.department?.name}}</option>
-                            } -->
                         </select>
                     </div>
 
@@ -41,7 +37,7 @@
                             <i class="fa-solid fa-arrow-left"></i>
                             Go Back
                         </a>
-                        <button class="btn btn-primary mt-2">Add</button>
+                        <button class="btn btn-warning mt-2">Update</button>
                     </div>
                 </form>
             </div>

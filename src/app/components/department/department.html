@@ -1,1 +1,36 @@
-<p>department works!</p>
+<nav class="navbar bg-white">
+    <div class="container-fluid d-flex justify-content-center align-content-center">
+            <input class="form-control me-2" type="search" placeholder="Search By Name" [(ngModel)]="searchValue"
+                aria-label="Search" />
+    </div>
+</nav>
+
+<section class="container">
+    <div class="p-4 pb-0">
+        <a routerLink="/addDepartment" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Department</a>
+    </div>
+ <!-- <input class="form-control me-2" type="search" placeholder="Search By Name" [(ngModel)]="searchValue"
+                aria-label="Search" /> -->
+    <div class="row g-3 p-4">
+        @if (departmentList.length === 0) {
+            <h1>No Departments Available</h1>
+        }
+        @else
+        {
+            @for (item of departmentList | searchDepartment:searchValue ; track $index) {
+                <div class="col-md-4">
+                    <div class="card-item rounded-2 p-4">
+                        <h3 class="text-center">{{item.name}}</h3>
+                        <p class="text-center">
+                            {{item.description}}
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <a [routerLink]='["/updateDepartment", item.id]' class="btn btn-warning me-2">Update</a>
+                            <button class="btn btn-danger" (click)="DeleteDepartment(item.id)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</section>

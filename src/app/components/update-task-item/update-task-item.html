@@ -2,7 +2,7 @@
     <div class="row p-5">
         <div class="col-md-6">
             <div class="form-group w-100">
-                <form [formGroup]="addTaskItemForm" (ngSubmit)="AddTaskItem()">
+                <form [formGroup]="updateTaskItemForm" (ngSubmit)="UpdateTaskItem()">
                     <!-- Title -->
                     <div class="mb-2">
                         <label for="title" class="form-label">Title</label>
@@ -54,7 +54,7 @@
                     <!-- Assigned To Dropdown -->
                     <div class="mb-2">
                         <label class="form-label">Assigned To</label>
-                        <select class="form-select" formControlName="assignedTo">
+                        <select class="form-select" formControlName="assignedToId">
                             <option value="">Select Employee</option>
                             @for (item of employeeList; track $index) {
                             <option [value]="item.id">{{ item.fullName }}</option>
@@ -67,7 +67,7 @@
                         <a routerLink="/dashboard" class="btn btn-secondary mt-2 me-3">
                             <i class="fa-solid fa-arrow-left"></i> Go Back
                         </a>
-                        <button class="btn btn-primary mt-2">Add</button>
+                        <button class="btn btn-warning mt-2">Update</button>
                     </div>
                 </form>
 

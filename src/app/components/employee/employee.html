@@ -1,1 +1,34 @@
-<p>employee works!</p>
+<nav class="navbar bg-white">
+    <div class="container-fluid d-flex justify-content-center align-content-center">
+        <input class="form-control me-2" type="search" placeholder="Search By Name" [(ngModel)]="searchValue"
+            aria-label="Search" />
+    </div>
+</nav>
+
+<section class="container">
+    <div class="p-4 pb-0">
+        <a routerLink="/addEmployee" class="btn btn-primary"><i class="fa fa-plus"></i> Add New Employee</a>
+    </div>
+
+    <div class="row g-3 p-4">
+        @if(employeeList.length !== 0){
+        @for (item of employeeList | search:searchValue ; track $index) {
+        <div class="col-md-4">
+            <div class="card-item rounded-2 p-4">
+                <p>Name: {{item.fullName}}</p>
+                <p>Email: {{item.email}}</p>
+                <p>Job Title: {{item.jobTitle}}</p>
+                <p>Department: {{item.department?.name}}</p>
+                <div>
+                    <a [routerLink]="['/updateEmployee', item.id]" class="btn btn-outline-warning me-2">Update</a>
+                    <button class="btn btn-outline-danger" (click)="DeleteEmployee(item.id)">Delete</button>
+                </div>
+            </div>
+        </div>
+        }
+        }
+        @else {
+        <h1>No Employee Available!</h1>
+        }
+    </div>
+</section>

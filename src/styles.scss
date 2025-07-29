@@ -1,26 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
-:root{
-    --main-color: #09c;
-    --light-color: #9db6f0;
-    --gray : #ccccccc8;
+* {
+    box-sizing: border-box;
 }
 
-section{
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+:root {
+    --main-color: #0D6EFD;
+    --light-color: #9db6f0;
+    --gray: #e8e2e2;
+}
+
+section {
     min-height: 100vh;
 }
 
-.cr{
+.cr {
     cursor: pointer;
 }
 
-.bg-main-color{
+.bg-main-color {
     background-color: var(--main-color);
 }
 
-.bg-light-color{
+.bg-light-color {
     background-color: var(--light-color);
 }
 
+.bg-gray-color {
+    background-color: var(--gray);
+}
 
 // .text-center{
 //     text-align: center;

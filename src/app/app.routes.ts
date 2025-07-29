@@ -34,12 +34,8 @@ export const routes: Routes = [
                 loadComponent: () => import('./components/add-department/add-department').then(m => m.AddDepartment)
             },
             {
-                path: 'AddTask',
+                path: 'addTask',
                 loadComponent: () => import('./components/add-task/add-task').then(m => m.AddTask)
-            },
-            {
-                path: 'task',
-                loadComponent: () => import('./components/task/task').then(m => m.Task)
             },
             {
                 path: 'employee',
@@ -48,6 +44,18 @@ export const routes: Routes = [
             {
                 path: 'department',
                 loadComponent: () => import('./components/department/department').then(m => m.Department)
+            },
+            {
+                path: 'updateEmployee/:id',
+                loadComponent: () => import('./components/update-employee/update-employee').then(m => m.UpdateEmployee)
+            },
+            {
+                path: 'updateDepartment/:id',
+                loadComponent: () => import('./components/update-department/update-department').then(m => m.UpdateDepartment)
+            },
+            {
+                path: 'updateTask/:id',
+                loadComponent: () => import('./components/update-task-item/update-task-item').then(m => m.UpdateTaskItem)
             },
         ]
     },
