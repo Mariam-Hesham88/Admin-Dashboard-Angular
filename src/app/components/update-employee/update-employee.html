@@ -6,13 +6,43 @@
                     <div class="mb-2">
                         <label for="fullName" class="form-label">Full Name</label>
                         <input type="text" id="fullName" class="form-control" placeholder="Enter full name"
-                            formControlName="fullName">
+                            formControlName="fullName"
+                            [ngClass]="{
+                'is-valid': !updateEmployeeForm.get('fullName')?.errors && (updateEmployeeForm.get('fullName')?.touched || updateEmployeeForm.get('fullName')?.dirty),
+                'is-invalid': updateEmployeeForm.get('fullName')?.errors && (updateEmployeeForm.get('fullName')?.touched || updateEmployeeForm.get('fullName')?.dirty)}">
+                        @if(updateEmployeeForm.get('fullName')?.errors && (updateEmployeeForm.get('fullName')?.touched ||
+                        updateEmployeeForm.get('fullName')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(updateEmployeeForm.get('fullName')?.getError('required')){
+                            <p class="m-0">FullName Is Required</p>
+                            }
+                            @else if(updateEmployeeForm.get('fullName')?.getError('minlenth')){
+                            <p class="m-0">must be more or equal 3 chars</p>
+                            }
+                        </div>
+                        }
                     </div>
+                    <!-- </div> -->
 
                     <div class="mb-2">
                         <label for="jobTitle" class="form-label">Job Title</label>
                         <input type="text" id="jobTitle" class="form-control" placeholder="Enter job title"
-                            formControlName="jobTitle">
+                            formControlName="jobTitle"
+                            [ngClass]="{
+                'is-valid': !updateEmployeeForm.get('jobTitle')?.errors && (updateEmployeeForm.get('jobTitle')?.touched || updateEmployeeForm.get('jobTitle')?.dirty),
+                'is-invalid': updateEmployeeForm.get('jobTitle')?.errors && (updateEmployeeForm.get('jobTitle')?.touched || updateEmployeeForm.get('jobTitle')?.dirty)}">
+                        @if(updateEmployeeForm.get('jobTitle')?.errors && (updateEmployeeForm.get('jobTitle')?.touched
+                        ||
+                        updateEmployeeForm.get('jobTitle')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(updateEmployeeForm.get('jobTitle')?.getError('required')){
+                            <p class="m-0">JobTitle Is Required</p>
+                            }
+                            @else if(updateEmployeeForm.get('jobTitle')?.getError('minlenth')){
+                            <p class="m-0">must be more or equal 3 chars</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <!-- Is Active -->
@@ -37,7 +67,7 @@
                             <i class="fa-solid fa-arrow-left"></i>
                             Go Back
                         </a>
-                        <button class="btn btn-warning mt-2">Update</button>
+                        <button class="btn btn-primary mt-2">Add</button>
                     </div>
                 </form>
             </div>

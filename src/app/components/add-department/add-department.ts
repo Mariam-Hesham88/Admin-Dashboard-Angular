@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterLink } from '@angular/router';
 import { IDepartment } from './../../core/interfaces/idepartment';
 import { DepartmentService } from '../../core/services/department-service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-add-department',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './add-department.html',
   styleUrl: './add-department.scss'
 })
@@ -17,7 +18,7 @@ export class AddDepartment {
   departmentList:IDepartment[] = [];
 
   addDepartmentForm: FormGroup = this._FormBuilder.group({
-  id: [null],
+  id: [''],
   name: ['', [Validators.required, Validators.minLength(2)]],
   description: ['', Validators.required],
 });

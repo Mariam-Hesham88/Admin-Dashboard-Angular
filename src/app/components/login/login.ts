@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth-service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
@@ -16,8 +17,8 @@ export class Login {
 
 
   loginForm: FormGroup = this._FormBuilder.group({
-    email: [null, [Validators.required, Validators.email]],
-    password: [null, [Validators.required, Validators.pattern(/^\w{6,}$/)]]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.pattern(/^\w{6,}$/)]]
   });
 
   LoginSubmition(): void {

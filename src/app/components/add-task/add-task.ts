@@ -5,10 +5,11 @@ import { TaskItemService } from '../../core/services/task-item-service';
 import { ITaskItem } from '../../core/interfaces/itask-item';
 import { EmployeeService } from '../../core/services/employee-service';
 import { IEmployee } from '../../core/interfaces/iemployee';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-add-task',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './add-task.html',
   styleUrl: './add-task.scss'
 })

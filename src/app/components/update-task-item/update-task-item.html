@@ -7,14 +7,43 @@
                     <div class="mb-2">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" id="title" class="form-control" placeholder="Enter the title"
-                            formControlName="title">
+                            formControlName="title"
+                            [ngClass]="{
+                'is-valid': !updateTaskItemForm.get('title')?.errors && (updateTaskItemForm.get('title')?.touched || updateTaskItemForm.get('fullName')?.dirty),
+                'is-invalid': updateTaskItemForm.get('title')?.errors && (updateTaskItemForm.get('title')?.touched || updateTaskItemForm.get('fullName')?.dirty)}">
+                        @if(updateTaskItemForm.get('title')?.errors && (updateTaskItemForm.get('title')?.touched ||
+                        updateTaskItemForm.get('title')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(updateTaskItemForm.get('title')?.getError('required')){
+                            <p class="m-0">Title Is Required</p>
+                            }
+                            @else if(updateTaskItemForm.get('title')?.getError('minlenth')){
+                            <p class="m-0">Title be more or equal 3 chars</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <!-- Description -->
                     <div class="mb-2">
                         <label for="description" class="form-label">Description</label>
                         <input type="text" id="description" class="form-control" placeholder="Enter the description"
-                            formControlName="description">
+                            formControlName="description"
+                            [ngClass]="{
+                'is-valid': !updateTaskItemForm.get('description')?.errors && (updateTaskItemForm.get('description')?.touched || updateTaskItemForm.get('description')?.dirty),
+                'is-invalid': updateTaskItemForm.get('description')?.errors && (updateTaskItemForm.get('description')?.touched || updateTaskItemForm.get('description')?.dirty)}">
+                        @if(updateTaskItemForm.get('description')?.errors &&
+                        (updateTaskItemForm.get('description')?.touched ||
+                        updateTaskItemForm.get('description')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(updateTaskItemForm.get('description')?.getError('required')){
+                            <p class="m-0">Description Is Required</p>
+                            }
+                            @else if(updateTaskItemForm.get('description')?.getError('minlenth')){
+                            <p class="m-0">Description be more or equal 3 chars</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <!-- Priority -->

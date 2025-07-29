@@ -5,10 +5,11 @@ import { DepartmentService } from '../../core/services/department-service';
 import { IEmployee } from '../../core/interfaces/iemployee';
 import { IDepartment } from '../../core/interfaces/idepartment';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-update-employee',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink,NgClass],
   templateUrl: './update-employee.html',
   styleUrl: './update-employee.scss'
 })

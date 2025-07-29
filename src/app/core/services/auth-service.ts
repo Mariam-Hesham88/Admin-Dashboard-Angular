@@ -34,8 +34,9 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(this.storageKey);
-    localStorage.removeItem('auth');
+    console.log("logedout")
+    // localStorage.removeItem(this.storageKey);
+    // localStorage.removeItem('auth');
   }
 }
 

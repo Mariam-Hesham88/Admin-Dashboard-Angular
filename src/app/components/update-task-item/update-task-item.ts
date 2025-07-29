@@ -6,10 +6,11 @@ import { ITaskItem } from '../../core/interfaces/itask-item';
 import { EmployeeService } from '../../core/services/employee-service';
 import { IEmployee } from '../../core/interfaces/iemployee';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-update-task-item',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgClass],
   templateUrl: './update-task-item.html',
   styleUrl: './update-task-item.scss'
 })

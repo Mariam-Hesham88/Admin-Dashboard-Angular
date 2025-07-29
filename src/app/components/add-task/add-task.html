@@ -2,19 +2,48 @@
     <div class="row p-5">
         <div class="col-md-6">
             <div class="form-group w-100">
+                <h1 class="pb-4">Add New Task</h1>
+                <hr>
                 <form [formGroup]="addTaskItemForm" (ngSubmit)="AddTaskItem()">
                     <!-- Title -->
                     <div class="mb-2">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" id="title" class="form-control" placeholder="Enter the title"
-                            formControlName="title">
+                            formControlName="title"
+                            [ngClass]="{
+                'is-valid': !addTaskItemForm.get('title')?.errors && (addTaskItemForm.get('title')?.touched || addTaskItemForm.get('fullName')?.dirty),
+                'is-invalid': addTaskItemForm.get('title')?.errors && (addTaskItemForm.get('title')?.touched || addTaskItemForm.get('fullName')?.dirty)}">
+                        @if(addTaskItemForm.get('title')?.errors && (addTaskItemForm.get('title')?.touched ||
+                        addTaskItemForm.get('title')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(addTaskItemForm.get('title')?.getError('required')){
+                            <p class="m-0">Title Is Required</p>
+                            }
+                            @else if(addTaskItemForm.get('title')?.getError('minlenth')){
+                            <p class="m-0">Title be more or equal 3 chars</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <!-- Description -->
                     <div class="mb-2">
                         <label for="description" class="form-label">Description</label>
                         <input type="text" id="description" class="form-control" placeholder="Enter the description"
+                            formControlName="description"
+                            [ngClass]="{
+                'is-valid': !addTaskItemForm.get('description')?.errors && (addTaskItemForm.get('description')?.touched || addTaskItemForm.get('description')?.dirty),
+                'is-invalid': addTaskItemForm.get('description')?.errors && (addTaskItemForm.get('description')?.touched || addTaskItemForm.get('description')?.dirty)}"
                             formControlName="description">
+                        @if(addTaskItemForm.get('description')?.errors &&
+                        (addTaskItemForm.get('description')?.touched ||
+                        addTaskItemForm.get('description')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(addTaskItemForm.get('description')?.getError('required')){
+                            <p class="m-0">description Is Required</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <!-- Priority -->

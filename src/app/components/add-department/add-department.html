@@ -2,6 +2,7 @@
     <div class="row p-5">
         <div class="col-md-6">
             <div class="form-group w-100">
+                <h1 class="pb-4">Add New Department</h1>
                 <form [formGroup]="addDepartmentForm" (ngSubmit)="AddDepartment()">
                     <div class="mb-2">
                         <label for="id" class="form-label">Department ID</label>
@@ -11,18 +12,42 @@
 
                     <div class="mb-2">
                         <label for="name" class="form-label">Department Name</label>
-                        <input type="name" id="name" class="form-control" placeholder="Enter Department Name"
-                            formControlName="name">
+                        <input type="name" id="name" class="form-control"
+                            [ngClass]="{
+                'is-valid': !addDepartmentForm.get('name')?.errors && (addDepartmentForm.get('name')?.touched || addDepartmentForm.get('name')?.dirty),
+                'is-invalid': addDepartmentForm.get('name')?.errors && (addDepartmentForm.get('name')?.touched || addDepartmentForm.get('name')?.dirty)}"
+                            placeholder="Enter Department Name" formControlName="name">
+                        @if(addDepartmentForm.get('name')?.errors && (addDepartmentForm.get('name')?.touched ||
+                        addDepartmentForm.get('name')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(addDepartmentForm.get('name')?.getError('required')){
+                            <p class="m-0">Name Is Required</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <div class="mb-2">
                         <label for="description" class="form-label">Department Description</label>
                         <input type="description" id="description" class="form-control"
-                            placeholder="Enter the description" formControlName="description">
+                            placeholder="Enter the description"
+                            [ngClass]="{
+                'is-valid': !addDepartmentForm.get('description')?.errors && (addDepartmentForm.get('description')?.touched || addDepartmentForm.get('description')?.dirty),
+                'is-invalid': addDepartmentForm.get('description')?.errors && (addDepartmentForm.get('description')?.touched || addDepartmentForm.get('description')?.dirty)}"
+                            formControlName="description">
+                        @if(addDepartmentForm.get('description')?.errors && (addDepartmentForm.get('description')?.touched ||
+                        addDepartmentForm.get('description')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(addDepartmentForm.get('description')?.getError('required')){
+                            <p class="m-0">description Is Required</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <div>
-                        <a routerLink="/department" class="btn btn-secondary mt-2 me-3"> <i class="fa-solid fa-arrow-left"></i> Go Back</a>
+                        <a routerLink="/department" class="btn btn-secondary mt-2 me-3"> 
+                            <i class="fa-solid fa-arrow-left"></i> Go Back</a>
                         <button class="btn btn-primary mt-2" type="submit">Add</button>
                     </div>
                 </form>

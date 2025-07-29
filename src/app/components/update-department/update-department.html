@@ -6,24 +6,53 @@
                     <div class="mb-2">
                         <label for="id" class="form-label">Department ID</label>
                         <input type="text" id="id" class="form-control" placeholder="Enter department id"
-                            formControlName="name">
+                            formControlName="name" readonly>
                     </div>
 
                     <div class="mb-2">
                         <label for="name" class="form-label">Department Name</label>
-                        <input type="name" id="name" class="form-control" placeholder="Enter Department Name"
-                            formControlName="name">
+                        <input type="name" id="name" class="form-control"
+                            [ngClass]="{
+                'is-valid': !updateDepartmentForm.get('name')?.errors && (updateDepartmentForm.get('name')?.touched || updateDepartmentForm.get('name')?.dirty),
+                'is-invalid': updateDepartmentForm.get('name')?.errors && (updateDepartmentForm.get('name')?.touched || updateDepartmentForm.get('name')?.dirty)}"
+                            placeholder="Enter Department Name" formControlName="name">
+                        name @if(updateDepartmentForm.get('name')?.errors &&
+                        (updateDepartmentForm.get('name')?.touched ||
+                        updateDepartmentForm.get('name')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(updateDepartmentForm.get('name')?.getError('required')){
+                            <p class="m-0">Name Is Required</p>
+                            }
+                            @else if(updateDepartmentForm.get('name')?.getError('minlenth')){
+                            <p class="m-0">must be more or equal 3 chars</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <div class="mb-2">
                         <label for="description" class="form-label">Department Description</label>
                         <input type="description" id="description" class="form-control"
-                            placeholder="Enter the description" formControlName="description">
+                            placeholder="Enter the description"
+                            [ngClass]="{
+                'is-valid': !updateDepartmentForm.get('description')?.errors && (updateDepartmentForm.get('description')?.touched || updateDepartmentForm.get('description')?.dirty),
+                'is-invalid': updateDepartmentForm.get('description')?.errors && (updateDepartmentForm.get('description')?.touched || updateDepartmentForm.get('description')?.dirty)}"
+                            formControlName="description">
+                        @if(updateDepartmentForm.get('description')?.errors && (updateDepartmentForm.get('description')?.touched
+                        ||
+                        updateDepartmentForm.get('description')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(updateDepartmentForm.get('description')?.getError('required')){
+                            <p class="m-0">description Is Required</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <div>
-                        <a routerLink="/department" class="btn btn-secondary mt-2 me-3"> <i class="fa-solid fa-arrow-left"></i> Go Back</a>
-                        <button class="btn btn-warning mt-2" type="submit">Update</button>
+                        <a routerLink="/department" class="btn btn-secondary mt-2 me-3"> <i
+                                class="fa-solid fa-arrow-left"></i> Go Back</a>
+                        <button class="btn btn-primary mt-2" type="submit">Add</button>
                     </div>
                 </form>
             </div>

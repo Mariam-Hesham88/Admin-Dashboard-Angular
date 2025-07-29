@@ -2,17 +2,47 @@
     <div class="row p-5">
         <div class="col-md-6">
             <div class="form-group w-100">
+                <h1 class="pb-4">Add New Employee</h1>
                 <form [formGroup]="addEmployeeForm" (ngSubmit)="AddEmployee()">
                     <div class="mb-2">
                         <label for="fullName" class="form-label">Full Name</label>
                         <input type="text" id="fullName" class="form-control" placeholder="Enter full name"
-                            formControlName="fullName">
+                            formControlName="fullName"
+                            [ngClass]="{
+                'is-valid': !addEmployeeForm.get('fullName')?.errors && (addEmployeeForm.get('fullName')?.touched || addEmployeeForm.get('fullName')?.dirty),
+                'is-invalid': addEmployeeForm.get('fullName')?.errors && (addEmployeeForm.get('fullName')?.touched || addEmployeeForm.get('fullName')?.dirty)}">
+                        @if(addEmployeeForm.get('fullName')?.errors && (addEmployeeForm.get('fullName')?.touched ||
+                        addEmployeeForm.get('fullName')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(addEmployeeForm.get('fullName')?.getError('required')){
+                            <p class="m-0">FullName Is Required</p>
+                            }
+                            @else if(addEmployeeForm.get('fullName')?.getError('minlenth')){
+                            <p class="m-0">must be more or equal 3 chars</p>
+                            }
+                        </div>
+                        }
                     </div>
+                    <!-- </div> -->
 
                     <div class="mb-2">
                         <label for="jobTitle" class="form-label">Job Title</label>
                         <input type="text" id="jobTitle" class="form-control" placeholder="Enter job title"
-                            formControlName="jobTitle">
+                            formControlName="jobTitle"
+                            [ngClass]="{
+                'is-valid': !addEmployeeForm.get('jobTitle')?.errors && (addEmployeeForm.get('jobTitle')?.touched || addEmployeeForm.get('jobTitle')?.dirty),
+                'is-invalid': addEmployeeForm.get('jobTitle')?.errors && (addEmployeeForm.get('jobTitle')?.touched || addEmployeeForm.get('jobTitle')?.dirty)}">
+                        @if(addEmployeeForm.get('jobTitle')?.errors && (addEmployeeForm.get('jobTitle')?.touched ||
+                        addEmployeeForm.get('jobTitle')?.dirty)){
+                        <div class="alert alert-danger">
+                            @if(addEmployeeForm.get('jobTitle')?.getError('required')){
+                            <p class="m-0">JobTitle Is Required</p>
+                            }
+                            @else if(addEmployeeForm.get('jobTitle')?.getError('minlenth')){
+                            <p class="m-0">must be more or equal 3 chars</p>
+                            }
+                        </div>
+                        }
                     </div>
 
                     <!-- Is Active -->
@@ -29,10 +59,6 @@
                             @for (item of departmentList; track $index) {
                             <option [value]="item.id">{{ item.name }}</option>
                             }
-
-                            <!-- @for (item of employeeList; track $index) {
-                                <option [value]="item.departmentId">{{item.department?.name}}</option>
-                            } -->
                         </select>
                     </div>
 
