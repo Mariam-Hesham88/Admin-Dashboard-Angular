@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Login } from './components/login/login';
+import { authGuard } from './core/gurds/auth-guard';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,7 @@ export const routes: Routes = [
     },
     {
         path: '',
+        canActivate:[authGuard],
         loadComponent: () => import('./layouts/blank-layout/blank-layout').then(m => m.BlankLayout),
         children: [
             {
