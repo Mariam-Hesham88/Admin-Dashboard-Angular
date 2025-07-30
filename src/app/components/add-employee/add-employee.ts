@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { EmployeeService } from '../../core/services/employee-service';
@@ -18,9 +18,8 @@ export class AddEmployee implements OnInit{
   private readonly _EmployeeService = inject(EmployeeService);
   private readonly _DepartmentService = inject(DepartmentService);
 
-  employeeList: IEmployee[] = []
-  departmentList: IDepartment[] = []
-
+  employeeList: WritableSignal<IEmployee[]> = signal([]);
+  departmentList:WritableSignal<IDepartment[]> = signal([]);
   addEmployeeForm: FormGroup = this._FormBuilder.group({
     fullName: ['', [Validators.required, Validators.minLength(3)]],
     jobTitle: ['', Validators.required],
@@ -29,8 +28,10 @@ export class AddEmployee implements OnInit{
   });
 
   loadData():void{
-    this.employeeList  = this._EmployeeService.GetAll();
-    this.departmentList  = this._DepartmentService.GetAll();
+    // this.employeeList  = this._EmployeeService.GetAll();
+    // this.departmentList  = this._DepartmentService.GetAll();
+    this.employeeList.set(this._EmployeeService.GetAll());
+    this.departmentList.set(this._DepartmentService.GetAll());
   }
 
   ngOnInit(): void {

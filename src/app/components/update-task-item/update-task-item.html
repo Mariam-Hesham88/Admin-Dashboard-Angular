@@ -85,7 +85,7 @@
                         <label class="form-label">Assigned To</label>
                         <select class="form-select" formControlName="assignedToId">
                             <option value="">Select Employee</option>
-                            @for (item of employeeList; track $index) {
+                            @for (item of employeeList(); track $index) {
                             <option [value]="item.id">{{ item.fullName }}</option>
                             }
                         </select>

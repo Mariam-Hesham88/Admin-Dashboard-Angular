@@ -1,6 +1,7 @@
 <nav class="navbar bg-white">
     <div class="container-fluid d-flex justify-content-center align-content-center">
-        <input class="form-control me-2" type="search" placeholder="Search By Name" [(ngModel)]="searchValue"
+        <input class="form-control me-2" type="search" placeholder="Search By Name" [ngModel]="searchValue()"
+            (ngModelChange)="searchValue.set($event)"
             aria-label="Search" />
     </div>
 </nav>
@@ -12,7 +13,7 @@
 
     <div class="row g-3 p-4">
         @if(employeeList.length !== 0){
-        @for (item of employeeList | search:searchValue ; track $index) {
+        @for (item of employeeList | search:searchValue() ; track $index) {
         <div class="col-md-4">
             <div class="card-item rounded-2 p-4">
                 <p>Name: {{item.fullName}}</p>

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { TaskItemService } from '../../core/services/task-item-service';
@@ -18,8 +18,8 @@ export class AddTask implements OnInit {
   private readonly _TaskItemService = inject(TaskItemService);
   private readonly _EmployeeService = inject(EmployeeService);
 
-  taskItemList: ITaskItem[] = [];
-  employeeList: IEmployee[] = [];
+  taskItemList: WritableSignal<ITaskItem[]> = signal([]);
+  employeeList: WritableSignal<IEmployee[]> = signal([]);
 
   addTaskItemForm: FormGroup = this._FormBuilder.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
@@ -43,8 +43,10 @@ export class AddTask implements OnInit {
   }
 
   loadTaskItem(): void {
-    this.taskItemList = this._TaskItemService.GetAll();
-    this.employeeList = this._EmployeeService.GetAll();
+    // this.taskItemList = this._TaskItemService.GetAll();
+    // this.employeeList = this._EmployeeService.GetAll();
+    this.taskItemList.set(this._TaskItemService.GetAll());
+    this.employeeList.set(this._EmployeeService.GetAll());
   }
 
   ngOnInit(): void {

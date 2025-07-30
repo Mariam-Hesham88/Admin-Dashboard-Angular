@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { IEmployee } from '../../core/interfaces/iemployee';
 import { RouterLink } from '@angular/router';
 import { EmployeeService } from '../../core/services/employee-service';
@@ -14,19 +14,19 @@ import { SearchPipe } from '../../core/pipes/search-pipe';
 export class Employee implements OnInit {
   private readonly _EmployeeService = inject(EmployeeService);
   employeeList: IEmployee[] = [];
-  searchValue: string = '';
+  searchValue:  WritableSignal<string> = signal('');
 
-  loadEmployee():void{
-    this.employeeList  = this._EmployeeService.GetAll();
+  loadData():void{
+    this.employeeList = this._EmployeeService.GetAll();
   }
 
   ngOnInit(): void {
-    this.loadEmployee();
+    this.loadData();
   }
 
   DeleteEmployee(id:number):void{
     this._EmployeeService.Delete(id);
-    this.loadEmployee();
+    this.loadData();
     console.log("worked")
   }
 

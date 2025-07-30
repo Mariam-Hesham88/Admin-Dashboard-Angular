@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IDepartment } from '../../core/interfaces/idepartment';
 import { DepartmentService } from '../../core/services/department-service';
@@ -18,8 +18,8 @@ export class UpdateDepartment implements OnInit {
   private readonly _DepartmentService = inject(DepartmentService);
   private readonly _ActivatedRoute = inject(ActivatedRoute);
 
-  departmentList: IDepartment[] = [];
-  departmentId: number = 0;
+  departmentList: WritableSignal<IDepartment[]> = signal([]);
+  departmentId: WritableSignal<number> = signal(0);
 
   updateDepartmentForm: FormGroup = this._FormBuilder.group({
     id: [null],
@@ -28,13 +28,13 @@ export class UpdateDepartment implements OnInit {
   });
 
   loadData(): void {
-    this.departmentList = this._DepartmentService.GetAll();
+    this.departmentList.set(this._DepartmentService.GetAll());
   }
 
   ngOnInit(): void {
     this.loadData();
-    this.departmentId = Number(this._ActivatedRoute.snapshot.paramMap.get('id'));
-    const data = this._DepartmentService.GetById(this.departmentId);
+    this.departmentId.set(Number(this._ActivatedRoute.snapshot.paramMap.get('id')));
+    const data = this._DepartmentService.GetById(this.departmentId());
     if (data) {
       this.updateDepartmentForm.patchValue(data);
     }
@@ -42,7 +42,7 @@ export class UpdateDepartment implements OnInit {
 
   UpdateDepartment(): void {
     console.log("worked");
-    this._DepartmentService.Update(this.departmentId, this.updateDepartmentForm.value);
+    this._DepartmentService.Update(this.departmentId(), this.updateDepartmentForm.value);
     this._Router.navigate(['/department']);
     this.loadData();
   }

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { TaskItemService } from '../../core/services/task-item-service';
 import { ITaskItem } from '../../core/interfaces/itask-item';
@@ -21,11 +21,10 @@ export class UpdateTaskItem {
   private readonly _Router = inject(Router)
   private readonly _EmployeeService = inject(EmployeeService)
 
-  taskList: ITaskItem[] = []
-  taskItemList: ITaskItem[] = [];
-  employeeList: IEmployee[] = [];
+  taskItemList: WritableSignal<ITaskItem[]> = signal([]);
+  employeeList: WritableSignal<IEmployee[]> = signal([]);
 
-  taskItemId:number = 0;
+  taskItemId: WritableSignal<number> = signal(0);
 
   updateTaskItemForm: FormGroup = this._FormBuilder.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
@@ -49,14 +48,14 @@ export class UpdateTaskItem {
   }
 
   loadData(): void {
-    this.taskItemList = this._TaskItemService.GetAll();
-    this.employeeList = this._EmployeeService.GetAll();
+    this.taskItemList.set(this._TaskItemService.GetAll());
+    this.employeeList.set(this._EmployeeService.GetAll());
   }
 
   ngOnInit(): void {
     this.loadData();
-    this.taskItemId = Number(this._ActivatedRoute.snapshot.paramMap.get('id'));
-    const data = this._TaskItemService.GetById(this.taskItemId);
+    this.taskItemId.set(Number(this._ActivatedRoute.snapshot.paramMap.get('id')));
+    const data = this._TaskItemService.GetById(this.taskItemId());
     if(data){
       this.updateTaskItemForm.patchValue(data);
     }
@@ -64,7 +63,7 @@ export class UpdateTaskItem {
 
   UpdateTaskItem(): void {
     console.log("worked");
-    this._TaskItemService.Update(this.taskItemId, this.updateTaskItemForm.value);
+    this._TaskItemService.Update(this.taskItemId(), this.updateTaskItemForm.value);
     this._Router.navigate(['/dashboard']);
     this.loadData();
   }

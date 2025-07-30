@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { IDepartment } from './../../core/interfaces/idepartment';
@@ -15,7 +15,7 @@ export class AddDepartment {
   private readonly _FormBuilder = inject(FormBuilder);
   private readonly _DepartmentService = inject(DepartmentService);
 
-  departmentList:IDepartment[] = [];
+  departmentList:WritableSignal<IDepartment[]> = signal([]);
 
   addDepartmentForm: FormGroup = this._FormBuilder.group({
   id: [''],
@@ -24,7 +24,8 @@ export class AddDepartment {
 });
 
   loadDepartments(): void {
-    this.departmentList = this._DepartmentService.GetAll();
+    // this.departmentList = this._DepartmentService.GetAll();
+    this.departmentList.set(this._DepartmentService.GetAll())
   }
 
   AddDepartment(): void {

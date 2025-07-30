@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IDepartment } from '../../core/interfaces/idepartment';
 import { DepartmentService } from '../../core/services/department-service';
@@ -15,19 +15,20 @@ export class Department {
   private readonly _DepartmentService = inject(DepartmentService);
 
   departmentList: IDepartment[] = [];
-  searchValue: string = '';
+  searchValue: WritableSignal<string> = signal('');
 
-  loadDepartments(): void {
+  loadData(): void {
     this.departmentList = this._DepartmentService.GetAll();
+    // this.departmentList.set(dept);
   }
 
   ngOnInit(): void {
-    this.loadDepartments();
+    this.loadData();
   }
 
   DeleteDepartment(id: number): void {
     this._DepartmentService.Delete(id);
-    this.loadDepartments();
+    this.loadData();
   }
 
 }
