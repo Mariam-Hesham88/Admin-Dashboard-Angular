@@ -20,7 +20,7 @@ export const routes: Routes = [
     },
     {
         path: '',
-        canActivate:[authGuard],
+        canActivate: [authGuard],
         loadComponent: () => import('./layouts/blank-layout/blank-layout').then(m => m.BlankLayout),
         children: [
             {
@@ -49,15 +49,24 @@ export const routes: Routes = [
             },
             {
                 path: 'updateEmployee/:id',
-                loadComponent: () => import('./components/update-employee/update-employee').then(m => m.UpdateEmployee)
+                loadComponent: () => import('./components/update-employee/update-employee').then(m => m.UpdateEmployee),
+                data: {
+                    renderMode: 'default'    
+                }
             },
             {
                 path: 'updateDepartment/:id',
-                loadComponent: () => import('./components/update-department/update-department').then(m => m.UpdateDepartment)
+                loadComponent: () => import('./components/update-department/update-department').then(m => m.UpdateDepartment),
+                data: {
+                    renderMode: 'default'    
+                }
             },
             {
                 path: 'updateTask/:id',
-                loadComponent: () => import('./components/update-task-item/update-task-item').then(m => m.UpdateTaskItem)
+                loadComponent: () => import('./components/update-task-item/update-task-item').then(m => m.UpdateTaskItem),
+                data: {
+                    renderMode: 'default'    
+                }
             },
         ]
     },
