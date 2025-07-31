@@ -1,4 +1,4 @@
-<nav class="navbar bg-white">
+<nav class="navbar bg-secondary-subtle">
     <div class="container-fluid d-flex justify-content-center align-content-center">
         <input class="form-control me-2" type="search" placeholder="Search" [ngModel]="SearchValue()"
             (ngModelChange)="SearchValue.set($event)"
@@ -10,8 +10,8 @@
     <app-employee-task-chart></app-employee-task-chart>
 </div>
 
-<section class=" p-5 pt-2 pb-0">
-    <div class="p-4 ps-3">
+<section class=" px-5 pt-0 pb-0">
+    <div class="p-4 pt-0 ps-3">
         <a routerLink='/addTask' routerLinkActive="router-link-active" class="btn btn-primary"><i
                 class="fa fa-plus"></i> Add New Task</a>
         <hr>

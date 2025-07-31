@@ -1,0 +1,14 @@
+<section class="container p-4 pb-0">
+  <h2 class="text-center mb-4">Tasks Per Employee</h2>
+
+  <div class="d-flex justify-content-center">
+    <highcharts-chart
+      [constructorType]="chartConstructor"
+      [options]="chartOptions"
+      [(update)]="updateFlag"
+      [oneToOne]="oneToOneFlag"
+      class="chart"
+    />
+  </div>
+</section>
+
